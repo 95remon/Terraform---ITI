@@ -1,2 +1,4 @@
 aws/
 Day 1/.terraform
+Day 1/terraform.tfstate
+Day 1/terraform.tfstate.backup
