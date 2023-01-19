@@ -1,5 +1,4 @@
 aws/
-Day 1/.terraform
-Day 1/terraform.tfstate
-Day 1/terraform.tfstate.backup
-Day 1/.terraform.lock.hcl
+Day1/*terraform*
+Day2/*terraform*
+*terraform*
