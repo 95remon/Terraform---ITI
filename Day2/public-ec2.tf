@@ -1,5 +1,5 @@
 resource "aws_instance" "iti-public-ec2" {
- 
+
     ami           =  var.aim-id
     
     instance_type = var.ec2-type
