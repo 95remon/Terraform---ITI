@@ -1,3 +1,3 @@
-# output "test" {
-#     value = module.network.subnet-ids["subnet-public-1-id"]
-# }
+output "alb-public-dns" {
+    value = module.loadbalancer.public-lb-dns
+}

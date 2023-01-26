@@ -13,3 +13,7 @@ output "private-tg-arn" {
 output "private-alb-sg-id" {
     value = aws_security_group.private-alb-sg.id
 }
+
+output "public-lb-dns" {
+    value = aws_alb.public-alb.dns_name
+}

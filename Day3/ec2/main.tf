@@ -32,11 +32,11 @@ resource "aws_instance" "public-ec2-1" {
     provisioner "remote-exec" {
         inline = [
             "sudo apt update -y",
-            "sudo apt install -y nginx",
+            "sudo apt install nginx -y ",
             "echo 'server { \n listen 80 default_server; \n  listen [::]:80 default_server; \n  server_name _; \n  location / { \n  proxy_pass http://${var.private-load-balancer-dns}; \n  } \n}' > default",
             "sudo mv default /etc/nginx/sites-enabled/default",
-            "sudo systemctl stop nginx",
-            "sudo systemctl start nginx",
+            "sudo systemctl restart nginx",
+            "sudo apt install curl -y",
         ]
 
         connection {
@@ -46,6 +46,9 @@ resource "aws_instance" "public-ec2-1" {
             private_key = file("ec2/remon-pair.pem")
         }
         
+    }
+    provisioner "local-exec" {
+        command = "echo Public-ip : ${self.public_ip} >> all-ips.txt"
     }
 
 
@@ -70,11 +73,11 @@ resource "aws_instance" "public-ec2-2" {
     provisioner "remote-exec" {
         inline = [
             "sudo apt update -y",
-            "sudo apt install -y nginx",
+            "sudo apt install nginx -y ",
             "echo 'server { \n listen 80 default_server; \n  listen [::]:80 default_server; \n  server_name _; \n  location / { \n  proxy_pass http://${var.private-load-balancer-dns}; \n  } \n}' > default",
             "sudo mv default /etc/nginx/sites-enabled/default",
-            "sudo systemctl stop nginx",
-            "sudo systemctl start nginx",
+            "sudo systemctl restart nginx",
+            "sudo apt install curl -y",
         ]
 
         connection {
@@ -84,6 +87,10 @@ resource "aws_instance" "public-ec2-2" {
             private_key = file("ec2/remon-pair.pem")
         }
         
+    }
+
+    provisioner "local-exec" {
+        command = "echo public-ip : ${self.public_ip} >> all-ips.txt"
     }
 
 
@@ -112,6 +119,10 @@ resource "aws_instance" "private-ec2s" {
     vpc_security_group_ids = [var.private-ec2-sg-id]
     
     user_data = file("ec2/ec2-userdata.sh")
+
+    provisioner "local-exec" {
+        command = "echo private-ip : ${self.private_ip} >> all-ips.txt"
+    }
     
     tags = {
       Name = "iti-ec2-${each.key}"
