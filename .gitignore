@@ -1,5 +1,3 @@
 aws/
-Day1/*terraform*
-Day2/*terraform*
+*.pem
 *terraform*
-Day3/*terraform*
