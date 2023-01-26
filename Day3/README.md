@@ -12,7 +12,7 @@
   ![alt](etc/dynamodb.png)
 
 - output allip.txt and the public lb DNS
-  ![alt](output.tf)
+  ![alt](etc/output.png)
 
 - access first private webserver
   ![alt](etc/DNS1.png)
